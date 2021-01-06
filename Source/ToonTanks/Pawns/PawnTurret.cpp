@@ -17,7 +17,6 @@ void APawnTurret::BeginPlay()
 void APawnTurret::HandleDestruction() 
 {
     Super::HandleDestruction();
-    Destroy();
 }
 
 // Called every frame
@@ -36,7 +35,7 @@ void APawnTurret::Tick(float DeltaTime)
 void APawnTurret::CheckFireCondition() 
 {
     // If Player == null || is Dead the bail!!
-    if (!PlayerPawn)
+    if (!PlayerPawn || !PlayerPawn->GetIsPlayerAlive())
     {
         return;
     }
@@ -57,4 +56,3 @@ float APawnTurret::ReturnDistanceToPlayer()
 
     return FVector::Dist(PlayerPawn->GetActorLocation(), GetActorLocation());
 }
-
